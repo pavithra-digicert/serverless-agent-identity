@@ -1,0 +1,4 @@
+pyjwt[crypto]
+cryptography
+python-dotenv
+azure-identity

@@ -1,0 +1,20 @@
+# Azure Functions
+functionapp/local.settings.json
+functionapp/.python_packages/
+functionapp/sdk/
+functionapp/agents/
+functionapp/verifier/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.env
+.venv
+venv/
+env/

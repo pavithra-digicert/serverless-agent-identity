@@ -1,0 +1,5 @@
+azure-functions
+azure-identity
+pyjwt[crypto]
+cryptography
+python-dotenv
