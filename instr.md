@@ -199,17 +199,17 @@ sdk/local/spire_server.py
 
 Move existing sdk/spire_server.py here. No logic changes.
 Add a module-level comment:
-  # LOCAL ONLY - simulates SPIRE Server for dev/experiment
-  # In production this role is played by Azure Managed Identity
-  # Never use this in production
+  " LOCAL ONLY - simulates SPIRE Server for dev/experiment
+   In production this role is played by Azure Managed Identity
+   Never use this in production"
 
 
 sdk/local/spire_agent.py
 
 Move existing sdk/spire_agent.py here. No logic changes.
 Add a module-level comment:
-  # LOCAL ONLY - simulates SPIRE Agent sidecar for dev/experiment
-  # In production this role is played by sdk/azure/spire_agent.py
+   LOCAL ONLY - simulates SPIRE Agent sidecar for dev/experiment
+   In production this role is played by sdk/azure/spire_agent.py
 
 
 sdk/azure/spire_server.py
@@ -242,10 +242,10 @@ as the trust anchor. Responsibilities:
     - Add comment: equivalent to SPIRE Server trust bundle endpoint
 
 Add a module-level comment:
-  # AZURE PRODUCTION - Azure Managed Identity is the trust anchor
-  # Equivalent role to SPIRE Server in container workloads
-  # Requires: Managed Identity enabled on the Azure Function
-  # Requires env vars: AZURE_TENANT_ID, AZURE_RESOURCE (optional)
+   AZURE PRODUCTION - Azure Managed Identity is the trust anchor
+   Equivalent role to SPIRE Server in container workloads
+   Requires: Managed Identity enabled on the Azure Function
+   Requires env vars: AZURE_TENANT_ID, AZURE_RESOURCE (optional)
 
 
 sdk/azure/spire_agent.py
@@ -269,9 +269,9 @@ Responsibilities:
     - Add comment: equivalent to SPIRE Agent bundle verification
 
 Add a module-level comment:
-  # AZURE PRODUCTION - equivalent to SPIRE Agent sidecar
-  # In containers: SPIRE Agent runs as a sidecar
-  # In Azure Functions: this SDK layer replaces the sidecar
+   AZURE PRODUCTION - equivalent to SPIRE Agent sidecar
+   In containers: SPIRE Agent runs as a sidecar
+   In Azure Functions: this SDK layer replaces the sidecar
 
 
 requirements.txt
@@ -342,9 +342,9 @@ Values needed to run locally:
   AZURE_RESOURCE: https://management.azure.com/.default
 
 Add a comment at the top:
-  # local.settings.json is never deployed to Azure
-  # In Azure these values are set via app settings
-  # Switch ENVIRONMENT to "azure" when deploying
+   local.settings.json is never deployed to Azure
+  In Azure these values are set via app settings
+   Switch ENVIRONMENT to "azure" when deploying
 
 
 functionapp/requirements.txt
@@ -399,17 +399,6 @@ into an HTTP trigger. Responsibilities:
   }
 
 - If any exception occurs return HTTP 500 with error message
-
-- Add these comments in the file:
-  # To run locally:
-  #   cd functionapp
-  #   func start
-  #   curl "http://localhost:7071/api/AgentTrigger?task=AI+agent+frameworks"
-  #
-  # To switch to Azure Managed Identity:
-  #   set ENVIRONMENT=azure in Azure app settings
-  #   no code changes needed
-
 
 PATH RESOLUTION
 
