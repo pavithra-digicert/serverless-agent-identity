@@ -1,4 +1,4 @@
-# LOCAL ONLY — simulates SPIRE Agent sidecar for dev/experiment
+# LOCAL ONLY - simulates SPIRE Agent sidecar for dev/experiment
 # In production this role is played by sdk/azure/spire_agent.py
 
 from __future__ import annotations

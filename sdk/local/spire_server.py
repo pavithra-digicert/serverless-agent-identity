@@ -1,4 +1,4 @@
-# LOCAL ONLY — simulates SPIRE Server for dev/experiment
+# LOCAL ONLY - simulates SPIRE Server for dev/experiment
 # In production this role is played by Azure Managed Identity
 # Never use this in production
 

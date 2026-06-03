@@ -9,6 +9,6 @@ def run(query: str) -> tuple[str, AgentIdentity]:
     identity = bootstrap("researcher-agent")
     print(f"[researcher-agent] Identity bootstrapped:\n  {identity!r}\n")
 
-    # Stub: no LLM or tool logic yet — replaced with real agent logic later.
+    # Stub: no LLM or tool logic yet - replaced with real agent logic later.
     result = f"[STUB] Hardcoded result for query: {query!r}"
     return result, identity

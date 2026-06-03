@@ -47,7 +47,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if not task:
             task = "default research task"
 
-        # Run the stub agent — no changes to researcher_agent.py.
+        # Run the stub agent - no changes to researcher_agent.py.
         result, identity = run(task)
 
         # Verify the agent's identity token from inside the function itself.

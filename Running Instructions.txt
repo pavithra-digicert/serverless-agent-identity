@@ -1,0 +1,82 @@
+
+## Run locally
+
+**Prerequisites:** Python 3.11+, packages installed
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the end-to-end experiment:
+```bash
+python main.py
+```
+
+You should see the agent bootstrap with a SPIFFE ID and the verifier confirm it as `VERIFIED`.
+
+To test it as an HTTP function, install [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) then:
+
+```bash
+pip install -r functionapp/requirements.txt --target functionapp/.python_packages/lib/site-packages
+
+cd functionapp
+func start
+```
+
+In another terminal:
+```bash
+curl "http://localhost:7071/api/AgentTrigger?task=AI+agent+frameworks"
+```
+
+---
+
+## Deploy to Azure
+
+**1. Create resources**
+```bash
+az group create --name rg-agent-identity --location eastus
+
+az storage account create --name sagentidentity \
+  --resource-group rg-agent-identity --sku Standard_LRS
+
+az functionapp create \
+  --name agent-identity-func \
+  --resource-group rg-agent-identity \
+  --storage-account sagentidentity \
+  --consumption-plan-location eastus \
+  --runtime python --runtime-version 3.11 --os-type linux
+```
+
+**2. Enable Managed Identity**
+```bash
+az functionapp identity assign \
+  --name agent-identity-func \
+  --resource-group rg-agent-identity
+```
+
+**3. Copy shared packages into the function folder and publish**
+```bash
+cp -r sdk agents verifier functionapp/
+
+cd functionapp
+func azure functionapp publish agent-identity-func --python
+```
+
+**4. Set app settings**
+```bash
+az functionapp config appsettings set \
+  --name agent-identity-func \
+  --resource-group rg-agent-identity \
+  --settings \
+    ENVIRONMENT=azure \
+    AZURE_TENANT_ID=$(az account show --query tenantId -o tsv)
+```
+
+**5. Test it**
+```bash
+curl "https://agent-identity-func.azurewebsites.net/api/AgentTrigger?task=AI+agent+frameworks"
+```
+
+The response will include the agent's identity, the SPIFFE ID, and whether it verified - now backed by Azure Managed Identity instead of a local key pair.
+
+---

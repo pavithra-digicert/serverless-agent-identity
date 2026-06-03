@@ -1,4 +1,4 @@
-# AZURE PRODUCTION — equivalent to SPIRE Agent sidecar
+# AZURE PRODUCTION - equivalent to SPIRE Agent sidecar
 # In containers: SPIRE Agent runs as a sidecar
 # In Azure Functions: this SDK layer replaces the sidecar
 
@@ -16,16 +16,16 @@ from sdk.identity import AgentIdentity
 def bootstrap(agent_name: str, ttl_seconds: int = 3600) -> AgentIdentity:
     """Attest the workload and deliver an Azure MI token as an AgentIdentity.
 
-    SPIRE concept: Workload API — the SPIRE Agent attests workloads and delivers
+    SPIRE concept: Workload API - the SPIRE Agent attests workloads and delivers
     their SVID. Here the Azure platform performs attestation via Managed Identity;
     this function fetches the resulting token and wraps it in an AgentIdentity.
 
     ttl_seconds is kept for API compatibility; actual expiry is taken from the
-    Azure token's 'exp' claim — the platform controls the token lifetime.
+    Azure token's 'exp' claim - the platform controls the token lifetime.
     """
     raw_token = get_managed_identity_token()
 
-    # Decode without verification — Azure guarantees the token's authenticity.
+    # Decode without verification - Azure guarantees the token's authenticity.
     claims = jwt.decode(
         raw_token,
         options={"verify_signature": False},
@@ -53,7 +53,7 @@ def bootstrap(agent_name: str, ttl_seconds: int = 3600) -> AgentIdentity:
 def verify_token(token: str) -> dict:
     """Validate an Azure MI JWT-SVID by delegating to the server's trust bundle.
 
-    SPIRE concept: Workload API validation — the SPIRE Agent provides a local
+    SPIRE concept: Workload API validation - the SPIRE Agent provides a local
     verification path. Here we delegate to spire_server; this module owns no
     key material.
     """

@@ -1,4 +1,4 @@
-# AZURE PRODUCTION — Azure Managed Identity is the trust anchor
+# AZURE PRODUCTION - Azure Managed Identity is the trust anchor
 # Equivalent role to SPIRE Server in container workloads
 # Requires: Managed Identity enabled on the Azure Function
 # Requires env vars: AZURE_TENANT_ID, AZURE_RESOURCE (optional)
@@ -19,7 +19,7 @@ AZURE_RESOURCE: str = os.getenv(
     "AZURE_RESOURCE", "https://management.azure.com/.default"
 )
 
-# Cached JWKS client — keys are fetched once and reused across invocations.
+# Cached JWKS client - keys are fetched once and reused across invocations.
 # PyJWKClient also handles key rotation automatically when a kid is not found.
 _jwks_client: PyJWKClient | None = None
 
