@@ -17,6 +17,7 @@ For this POC, the `sdk/` folder is shared by physically copying it into the depl
 - **An HTTP service** - agents call a local sidecar or a central identity endpoint to get their token, similar to how SPIRE's Workload API works over a Unix socket. The agent never holds any key material at all.
 
 Next Step: Currently researcher-agent is a stub. Use an agent to convey the concept. 
+
 ---
 
 
